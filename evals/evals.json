@@ -1,0 +1,92 @@
+{
+  "skill_name": "guided-coding",
+  "evals": [
+    {
+      "id": 0,
+      "name": "feature-copy-existing-pattern",
+      "prompt": "I'm working in the pailab repo at /private/tmp/claude-501/-Users-bradleyhartlove-code/f7b72c86-0c72-43e7-906f-383d628bb5b5/scratchpad/repos/pailab. I want to add a --dry-run flag to the `pailab join` command, same idea as the one `pailab install` already has: print what it would do and stop before touching the host. I want to write this myself so I actually learn how the commands are wired up. Walk me through how install does it, how join is put together, and what order I should do things in. Don't write the code for me.",
+      "expected_output": "A plain-language map of how the install command implements --dry-run and how join is structured, with file:line references, a pattern to copy, and a numbered ordered plan. No files modified, no new code or pseudocode written.",
+      "files": [],
+      "assertions": [
+        "No files in the repository were created, modified, or deleted (git status clean after the run)",
+        "The response contains no new code: no code fences with Go/Rust/shell code to type, no pseudocode, no 'something like this' snippets (quoting existing repo code is fine)",
+        "The response references specific files and functions in the repo with file paths (and ideally line numbers) the user can jump to",
+        "The response gives a numbered, ordered plan where each step says what to change, where, and how to verify it",
+        "The response points to an existing piece of code in the repo as the pattern to copy",
+        "The response explains the code flow in plain, simple language: short sentences, codebase terms defined on first use, cause and effect spelled out",
+        "The response ends by handing the first step back to the user to implement rather than continuing to solve the problem",
+        "The response explains how the install command implements --dry-run (where the flag is declared, where it's checked, what it prints) before describing what to do for join"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "debug-understand-not-fix",
+      "prompt": "Repo is at /private/tmp/claude-501/-Users-bradleyhartlove-code/f7b72c86-0c72-43e7-906f-383d628bb5b5/scratchpad/repos/zip-ties-runner. I think there's a bug where a workspace's port-forward isn't cleaned up when the workspace gets deleted, but honestly I don't understand how port forwarding and workspace lifecycle fit together in this codebase. Help me understand the flow and where to look so I can track this down myself. I'll do the actual fixing, I just want to understand the code.",
+      "expected_output": "A plain-language walkthrough of workspace lifecycle and port-forward setup/teardown with file:line references, candidate places where cleanup could be missed framed as pointers and questions, and a suggested investigation order. No fix written, no files modified.",
+      "files": [],
+      "assertions": [
+        "No files in the repository were created, modified, or deleted (git status clean after the run)",
+        "The response contains no new code: no code fences with Go/Rust/shell code to type, no pseudocode, no 'something like this' snippets (quoting existing repo code is fine)",
+        "The response references specific files and functions in the repo with file paths (and ideally line numbers) the user can jump to",
+        "The response gives a numbered, ordered plan where each step says what to change, where, and how to verify it",
+        "The response points to an existing piece of code in the repo as the pattern to copy",
+        "The response explains the code flow in plain, simple language: short sentences, codebase terms defined on first use, cause and effect spelled out",
+        "The response ends by handing the first step back to the user to implement rather than continuing to solve the problem",
+        "The response frames candidate bug locations as places to look and questions to answer, not as a diagnosed fix",
+        "The response describes the workspace deletion path and the port-forward setup/teardown path and where they meet"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "resists-request-for-skeleton",
+      "prompt": "Working in /private/tmp/claude-501/-Users-bradleyhartlove-code/f7b72c86-0c72-43e7-906f-383d628bb5b5/scratchpad/repos/pailab. Guide me through adding a new `pailab logs` subcommand that tails the logs of the pailab-agent systemd service over SSH on a lab host. I want to learn the codebase so I'll do the coding, but can you at least drop me a quick skeleton of the cobra command so I have somewhere to start? Then tell me what order to do the rest in.",
+      "expected_output": "Declines to write the skeleton while staying friendly, points to an existing simple subcommand as the pattern to copy with file:line references, explains how commands are registered, and gives an ordered plan. No code written, no files modified.",
+      "files": [],
+      "assertions": [
+        "No files in the repository were created, modified, or deleted (git status clean after the run)",
+        "The response contains no new code: no code fences with Go/Rust/shell code to type, no pseudocode, no 'something like this' snippets (quoting existing repo code is fine)",
+        "The response references specific files and functions in the repo with file paths (and ideally line numbers) the user can jump to",
+        "The response gives a numbered, ordered plan where each step says what to change, where, and how to verify it",
+        "The response points to an existing piece of code in the repo as the pattern to copy",
+        "The response explains the code flow in plain, simple language: short sentences, codebase terms defined on first use, cause and effect spelled out",
+        "The response ends by handing the first step back to the user to implement rather than continuing to solve the problem",
+        "The response declines to provide the cobra command skeleton, explains briefly why, and offers a pointer to an existing simple subcommand instead"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "spot-check-flawed-implementation",
+      "prompt": "Back in the pailab repo at <run repo path>. Earlier you gave me a plan for adding --dry-run to `pailab join`, modeled on how `pailab install` does it. I've done the first couple of steps: added the flag and a short-circuit in runJoin. It's uncommitted, so just look at the diff. Can you spot check what I did before I keep going? I want to know if I'm doing it the way this codebase expects, not just whether it compiles.",
+      "expected_output": "A review of the uncommitted diff that catches both planted flaws (dry-run after root check; flag outside flag group), explains why each matters by pointing at install's code, names what was done right, and leaves the fixing to the user. No code written, diff unchanged.",
+      "files": [],
+      "assertions": [
+        "The user's uncommitted diff is unchanged after the run (no further edits, no reverts, no new files)",
+        "The response contains no new code: no corrected version of the flag line or the dry-run block, no snippets to paste",
+        "The response identifies that the dry-run check sits after requireRoot, so a dry run would need sudo, and explains why install puts it before the root check",
+        "The response identifies that the flag is declared outside a flagGroup, points to how install registers --dry-run in a group, and explains why the codebase groups flags",
+        "For each problem, the response says what's wrong, why it matters, and where in the repo to look, without stating the fix",
+        "The response names at least one thing the user did right, specifically",
+        "The response uses plain, simple language with short sentences and defines codebase terms on first use",
+        "The response does not advance to the next step while problems remain, or clearly separates fix-these-first from what's next"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "borrows-pattern-from-sibling-repo",
+      "prompt": "I'm in the pailab repo at <run repo path>. The uninstall confirmation in cmd/uninstall.go reads straight from stdin and there's no unit test for it, which bugs me. I'm pretty sure one of our other Go CLIs has a cleaner, testable way of doing confirmation prompts. Can you look at how we handle this elsewhere and walk me through how I'd bring that approach into pailab? I'll do the refactor myself, I just want to understand the pattern and the order to do it in.",
+      "expected_output": "Resolves the examples root from the repo-level .guided-coding.json, finds aictl's confirmTarget/confirmIO pattern, explains it plainly, contrasts with pailab's confirmUninstall and promptYesNo, gives an ordered refactor plan. No code written.",
+      "files": [],
+      "assertions": [
+        "No files in the repository were created, modified, or deleted",
+        "The response contains no new code: no refactored version of confirmUninstall, no struct definitions, no snippets to paste",
+        "The response finds and names a sibling repo from the configured examples root (aictl) and points at its confirmation code with full file paths",
+        "The response explains the sibling pattern in plain language: what is injected, why that makes it testable, and how the non-interactive case is handled",
+        "The response compares the sibling pattern with pailab's current approach (confirmUninstall, promptYesNo in cmd/prompt.go) and says what to keep from pailab and what to borrow",
+        "The response says the current repo's conventions win where they conflict with the sibling, or otherwise treats the sibling as a reference rather than a template to copy blindly",
+        "The response gives a numbered, ordered plan where each step says what to change, where, and how to verify it",
+        "The response uses plain, simple language with short sentences and defines codebase terms on first use",
+        "The response ends by handing the first step back to the user to implement"
+      ]
+    }
+  ]
+}
