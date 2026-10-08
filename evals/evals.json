@@ -8,7 +8,7 @@
       "expected_output": "A plain-language map of how the install command implements --dry-run and how join is structured, with file:line references, a pattern to copy, and a numbered ordered plan. No files modified, no new code or pseudocode written.",
       "files": [],
       "assertions": [
-        "No files in the repository were created, modified, or deleted (git status clean after the run)",
+        "No source files were created, modified, or deleted; the only allowed write is the plan file under docs/guided/ (git status shows nothing else)",
         "The response contains no new code: no code fences with Go/Rust/shell code to type, no pseudocode, no 'something like this' snippets (quoting existing repo code is fine)",
         "The response references specific files and functions in the repo with file paths (and ideally line numbers) the user can jump to",
         "The response gives a numbered, ordered plan where each step says what to change, where, and how to verify it",
@@ -25,7 +25,7 @@
       "expected_output": "A plain-language walkthrough of workspace lifecycle and port-forward setup/teardown with file:line references, candidate places where cleanup could be missed framed as pointers and questions, and a suggested investigation order. No fix written, no files modified.",
       "files": [],
       "assertions": [
-        "No files in the repository were created, modified, or deleted (git status clean after the run)",
+        "No source files were created, modified, or deleted; the only allowed write is the plan file under docs/guided/ (git status shows nothing else)",
         "The response contains no new code: no code fences with Go/Rust/shell code to type, no pseudocode, no 'something like this' snippets (quoting existing repo code is fine)",
         "The response references specific files and functions in the repo with file paths (and ideally line numbers) the user can jump to",
         "The response gives a numbered, ordered plan where each step says what to change, where, and how to verify it",
@@ -43,7 +43,7 @@
       "expected_output": "Declines to write the skeleton while staying friendly, points to an existing simple subcommand as the pattern to copy with file:line references, explains how commands are registered, and gives an ordered plan. No code written, no files modified.",
       "files": [],
       "assertions": [
-        "No files in the repository were created, modified, or deleted (git status clean after the run)",
+        "No source files were created, modified, or deleted; the only allowed write is the plan file under docs/guided/ (git status shows nothing else)",
         "The response contains no new code: no code fences with Go/Rust/shell code to type, no pseudocode, no 'something like this' snippets (quoting existing repo code is fine)",
         "The response references specific files and functions in the repo with file paths (and ideally line numbers) the user can jump to",
         "The response gives a numbered, ordered plan where each step says what to change, where, and how to verify it",
